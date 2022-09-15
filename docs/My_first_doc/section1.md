@@ -1,3 +1,8 @@
+### Images local
+#### Here is an example of an image 
+![Cisco]({{ img_dir }}Cisco.png "Cisco Logo")
+
+
 ## Tables
 
 | Option | Description |
@@ -5,17 +10,12 @@
 | data   | path to data files to supply the data that will be passed into templates. |
 | engine | engine to be used for processing templates. Handlebars is the default. |
 | ext    | extension to be used for dest files. |
-
-Right aligned columns
-
-| Option | Description |
-| ------:| -----------:|
-| data   | path to data files to supply the data that will be passed into templates. |
-| engine | engine to be used for processing templates. Handlebars is the default. |
-| ext    | extension to be used for dest files. |
+| customer   | Some customer data  |
+| priority | excellence, prestige and real good times |
+| method    | Building a great document |
 
 
-## Links
+### Links
 
 [link text](http://dev.nodeca.com)
 
@@ -26,9 +26,9 @@ Autoconverted link https://github.com/nodeca/pica (enable linkify to see)
 
 ### [Definition lists](https://github.com/markdown-it/markdown-it-deflist)
 
-Term 1
+Documentation as code
 
-:   Definition 1
+:   Building documents using the tools and methods used by software devs
 with lazy continuation.
 
 Term 2 with *inline markup*

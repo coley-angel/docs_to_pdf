@@ -1,27 +1,19 @@
 @font-face {
   font-family: CiscoSans;
   font-weight: 400;
-  src: url(CiscoSans_Global-Medium.ttf);
+  src: url(CiscoSans_ME-Medium.ttf);
 }
-@font-face {
-  font-family: CiscoSans;
-  font-style: italic;
-  src: url(/usr/share/fonts/truetype/open-sans/OpenSans-Italic.ttf)
-}
-@font-face {
-  font-family: CiscoSans;
-  src: url(CiscoSans_Global.ttf);
-}
+
 @font-face {
   font-family: CiscoSans;
   font-weight: 300;
-  src: url(CiscoSans_Global-Light.ttf);
+  src: url(CiscoSans_ME-Light.ttf);
 }
 
 @font-face {
   font-family: CiscoSans;
   font-weight: 700;
-  src: url(CiscoSans_Global-Bold.ttf);
+  src: url(CiscoSans_ME-Bold.ttf);
 }
 strong {
   font-weight: bold;
@@ -57,6 +49,7 @@ html {
   font-size: 11pt;
   font-weight: 300;
   line-height: 1.5;
+  text: wrap;
 }
 
 h1 {
@@ -191,11 +184,13 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
   padding-left: 0;
 }
 #contents ul li {
-  color: #0D274D;
-  margin: .05cm 0;
-  padding-top: .05cm;
+  border-top: .25pt solid #c1c1c1;
+  margin: .25cm 0;
+  padding-top: .25cm;
 }
 #contents ul li::before {
+  color: #049FD9;
+  content: '• ';
   font-size: 40pt;
   line-height: 16pt;
   vertical-align: bottom;
@@ -208,7 +203,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
   content: target-text(attr(href));
 }
 #contents ul li a::after {
-  color: #0D274D;
+  color: #049FD9;
   content: target-counter(attr(href), page);
   float: right;
 }
@@ -223,6 +218,117 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 }
 #columns section p:first-of-type {
   font-weight: 700;
+}
+
+#skills h3 {
+  background: #049FD9;
+  margin: 0 -3cm 1cm;
+  padding: 1cm 1cm 1cm 3cm;
+  width: 21cm;
+}
+#skills section {
+  padding: .5cm 0;
+}
+#skills section#table-content::before {
+  background: url(table-content.svg) no-repeat center #049FD9;
+  background-size: 50%;
+  content: '';
+  display: inline-block;
+  float: left;
+  height: 2cm;
+  margin-right: .5cm;
+  vertical-align: middle;
+  width: 2cm;
+}
+#skills section#heading::before {
+  background: url(heading.svg) no-repeat center #049FD9;
+  background-size: 50%;
+  content: '';
+  display: inline-block;
+  float: left;
+  height: 2cm;
+  margin-right: .5cm;
+  vertical-align: middle;
+  width: 2cm;
+}
+#skills section#multi-columns::before {
+  background: url(multi-columns.svg) no-repeat center #049FD9;
+  background-size: 50%;
+  content: '';
+  display: inline-block;
+  float: left;
+  height: 2cm;
+  margin-right: .5cm;
+  vertical-align: middle;
+  width: 2cm;
+}
+#skills section#internal-links::before {
+  background: url(internal-links.svg) no-repeat center #049FD9;
+  background-size: 50%;
+  content: '';
+  display: inline-block;
+  float: left;
+  height: 2cm;
+  margin-right: .5cm;
+  vertical-align: middle;
+  width: 2cm;
+}
+#skills section#style::before {
+  background: url(style.svg) no-repeat center #049FD9;
+  background-size: 50%;
+  content: '';
+  display: inline-block;
+  float: left;
+  height: 2cm;
+  margin-right: .5cm;
+  vertical-align: middle;
+  width: 2cm;
+}
+#skills section h4 {
+  margin: 0;
+}
+#skills section p {
+  margin-top: 0;
+}
+
+#offers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+#offers h2, #offers h3 {
+  width: 100%;
+}
+#offers section {
+  width: 30%;
+}
+#offers section h4 {
+  margin-bottom: 0;
+}
+#offers section ul {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+#offers section ul li:not(:last-of-type) {
+  margin: .5cm 0;
+}
+#offers section p {
+  background: #049FD9;
+  display: block;
+  font-size: 15pt;
+  font-weight: 700;
+  margin-bottom: 0;
+  padding: .25cm 0;
+  text-align: center;
+}
+
+#chapter {
+  align-items: center;
+  display: flex;
+  height: 297mm;
+  justify-content: center;
+  page: chapter;
 }
 
 #typography section {

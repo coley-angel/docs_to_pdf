@@ -1,5 +1,5 @@
 author: Cole Angel
-title: "New document for Cisco"
+title: "Doc As Code Example"
 address: Cisco Address San Jose, CA
 email: coangel@cisco.com
 reviewers:
@@ -9,9 +9,9 @@ version: 1.1
 revision: 1.1
 template: 'report'
 sections:
- Opening: "section1.md"
- Format: "section3.md"
- Device Description: "section2.md"
- Team: "section4.md"
+ Opening: "opening.md"
+ Device Description: "device.md"
+ Team: "team.md"
+
 
 

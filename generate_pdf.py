@@ -4,8 +4,10 @@ import os
 import yaml
 import markdown
 from datetime import date
+import logging
 
-
+logger = logging.getLogger('weasyprint')
+logger.addHandler(logging.FileHandler('weasyprint.log'))
 
 def render_html(templates_dir, context, template="report.html"):
     """
@@ -15,16 +17,15 @@ def render_html(templates_dir, context, template="report.html"):
     template_env = jinja2.Environment(loader=template_loader)
     template = template_env.get_template(template)
     output_text = template.render(context)
-    css = os.path.join(templates_dir, 'report.css')
-    print("Now converting ... ")
+    print(f"Now converting `{context['title']}`... ")
     pdf_path = os.path.join(py_path, 'results', f'{context["title"]}.pdf')
-    html2pdf(output_text, pdf_path, css)   
+    html2pdf(output_text, pdf_path)   
 
-def html2pdf(html_string, pdf_path, css):
+def html2pdf(html_string, pdf_path):
     """
     Convert html to pdf using weasyprint which is a wrapper of wkhtmltopdf
     """
-    HTML(string=html_string).write_pdf(pdf_path, stylesheets=[CSS(css)])
+    HTML(string=html_string).write_pdf(pdf_path)
 
 def get_date():
     "Get today's date in US format"
@@ -42,10 +43,13 @@ def get_yml(path_name):
 def get_markdown(path_name) -> str:
     with open(path_name, "r") as stream:
         try:
-            md_html = markdown.markdown(stream.read(), output_format='html',  extensions=['markdown.extensions.extra'])
+            extensions=['markdown.extensions.extra', 'markdown.extensions.codehilite', 
+                        'markdown.extensions.smarty', 'pymdownx.tilde', 'pymdownx.emoji', 
+                        'pymdownx.smartsymbols']
+            md_html = markdown.markdown(stream.read(), output_format='html',  extensions=extensions)
         except Exception as exc:
             md_html = ""
-        return md_html
+        return jinja2.Template(md_html)
 
 def get_abs_path_directory(directory):
     path = os.path.dirname(os.path.abspath(directory))
@@ -60,30 +64,24 @@ def img_to_abs_path(templates_dir, context):
     except KeyError as e:
         pass
 
-# def get_sub_sections(path, meta_data, templates_dir):
-#     for key, val in meta_data.get('sections', {}).items():
-#         sub_section_path = os.path.join(path, val)
-#         sub_sect_dict = get_yml(sub_section_path)
-#         img_to_abs_path(templates_dir, sub_sect_dict)
-#         meta_data['sections'][key] = sub_sect_dict
-#     return meta_data
 
-def get_sub_sections(path, meta_data, templates_dir):
+def get_sub_sections(path, meta_data):
     for key, val in meta_data.get('sections', {}).items():
         sub_section_path = os.path.join(path, val)
         sub_sect_html = get_markdown(sub_section_path)
-        print(sub_sect_html)
         meta_data['sections'][key] = sub_sect_html
     return meta_data
 
     
-def build_context(path, files, templates_dir, base_yml="meta_data.yml"):
+def build_context(path, files, base_yml="meta_data.yml"):
     if base_yml in files:
         base_file_path = os.path.join(path, base_yml)
-        meta_data = get_yml(base_file_path)
-        img_to_abs_path(templates_dir, meta_data)      
-        get_sub_sections(path, meta_data, templates_dir)
+        meta_data = get_yml(base_file_path)     
+        get_sub_sections(path, meta_data)
     return meta_data
+
+def make_file_path(directory):
+   return f'file:{os.path.sep}{os.path.sep}{directory}{os.path.sep}' 
 
 def get_docs(py_path):
     doc_path = os.path.join(py_path, 'docs')
@@ -91,8 +89,11 @@ def get_docs(py_path):
     for directory in directorys:
         dir_path = os.path.join(doc_path, directory)
         sub_path, sub_directorys, sub_filenames = get_files(dir_path)
-        templates_dir = os.path.join(py_path, 'templates', 'report')
-        context = build_context(path=sub_path, files=sub_filenames, templates_dir=templates_dir)
+        context = build_context(path=sub_path, files=sub_filenames)
+        templates_dir = os.path.join(py_path, 'templates', context.get('template', 'report'))
+        img_directory = os.path.join(dir_path, 'imgs')
+        context['base_dir'] = make_file_path(templates_dir)
+        context['img_dir'] = make_file_path(img_directory)
         render_html(templates_dir, context)
 
 if __name__ == "__main__":
