@@ -10,8 +10,9 @@ revision: 1.1
 template: 'report'
 sections:
  Opening: "opening.md"
- Device Description: "device.md"
+ Git Workflow: "git_workflow.md"
  Team: "team.md"
+ Device Description: "device.md"
 
 
 

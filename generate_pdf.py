@@ -66,7 +66,8 @@ def img_to_abs_path(templates_dir, context):
 
 
 def get_sub_sections(path, meta_data):
-    for key, val in meta_data.get('sections', {}).items():
+    meta_data['sections'] = meta_data.get('sections', {}) or {}
+    for key, val in meta_data['sections'].items():
         sub_section_path = os.path.join(path, val)
         sub_sect_html = get_markdown(sub_section_path)
         meta_data['sections'][key] = sub_sect_html
