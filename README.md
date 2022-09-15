@@ -4,6 +4,11 @@
 ### Install
 1. apt install python3-pip libpango-1.0-0 libharfbuzz0b libpangoft2-1.0-0 fonts-open-sans
 1. run `pip install -r requirements.txt`
+
+## MAC OS dependencies
+### Install
+1. Install [homebrew](https://brew.sh/ "Homebrew")
+1. brew install python pango libffi
    
 ## Basic Use case -> generate styalized pdf's using html templates
 1. Install python (see above for ubuntu instructions)
