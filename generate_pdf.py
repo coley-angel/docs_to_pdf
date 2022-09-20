@@ -16,6 +16,7 @@ def render_html(templates_dir, context, template="report.html"):
     template_loader = jinja2.FileSystemLoader(searchpath=templates_dir)
     template_env = jinja2.Environment(loader=template_loader)
     template = template_env.get_template(template)
+    set_date(context)
     output_text = template.render(context)
     print(f"Now converting `{context['title']}`... ")
     pdf_path = os.path.join(py_path, 'results', f'{context["title"]}.pdf')
@@ -31,6 +32,9 @@ def get_date():
     "Get today's date in US format"
     today = date.today()
     return today.strftime("%m.%d.%Y")
+
+def set_date(context):
+    context['date'] = context.get('date') or get_date()
 
 def get_yml(path_name):
     with open(path_name, "r") as stream:

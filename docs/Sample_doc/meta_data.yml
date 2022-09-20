@@ -1,0 +1,4 @@
+title: My special title
+sub_title: Sub title name goes here
+sections:
+ 'include this text': 'my text.md'

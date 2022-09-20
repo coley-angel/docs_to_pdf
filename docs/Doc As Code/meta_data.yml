@@ -1,5 +1,6 @@
 author: Cole Angel
 title: "Doc As Code Example"
+sub_title: "A guide to documenting things the cool way"
 address: Cisco Address San Jose, CA
 email: coangel@cisco.com
 reviewers:
@@ -7,9 +8,10 @@ reviewers:
  - Brett Fox
 version: 1.1
 revision: 1.1
-template: 'report'
+template: 'navy'
 sections:
  Opening: "opening.md"
+ sample: "sample.md"
  Git Workflow: "git_workflow.md"
  Team: "team.md"
  Device Description: "device.md"

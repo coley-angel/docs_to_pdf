@@ -8,8 +8,12 @@
   </head>
 
   <body>
-    <article id="cover">
+    <article id="cover" class="center">
+      <div id="content">
       <h1>{{ title }}</h1>
+      <h3>{{ sub_title }}</h3>
+      <h4>Date - {{ date }}</h4>
+      </div>
     </article>
     <article id="contents">
       <h2>Table of contents</h2>
@@ -18,7 +22,6 @@
         <li><a href="#{{ key }}"></a></li>
         {% endfor %}
       </ul>
-
     </article>
     {% for key, sub_sect in sections.items() %}
     <article>

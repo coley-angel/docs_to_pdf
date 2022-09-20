@@ -61,7 +61,6 @@ html {
 
 h1 {
   font-size: 38pt;
-  margin: 5cm 2cm 0 2cm;
   width: 100%;
 }
 h2, h3, h4 {
@@ -86,9 +85,8 @@ h4 {
 
 #cover {
   align-content: space-between;
-  display: flex;
   flex-wrap: wrap;
-  height: 297mm;
+  height: auto;
 }
 #cover h1 {
   color: #00BCEB;
@@ -346,4 +344,15 @@ img {
   max-width: 100%;
   height: auto;
 
+}
+.center {
+  text-align: center;
+}
+.center #content {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
