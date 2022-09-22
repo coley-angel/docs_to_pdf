@@ -1,3 +1,5 @@
+### {{ defaults.CompanyName }}
+
 Docs as Code
 Documentation as Code (Docs as Code) refers to a philosophy that you should be writing documentation with the same tools as code:
 

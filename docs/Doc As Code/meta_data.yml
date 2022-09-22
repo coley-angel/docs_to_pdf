@@ -9,6 +9,8 @@ reviewers:
 version: 1.1
 revision: 1.1
 template: 'report'
+defaults: !include defaults.yml
+default_project: !include my_project_common/defaults.yml
 sections:
  Opening: "opening.md"
  sample: "sample.md"
