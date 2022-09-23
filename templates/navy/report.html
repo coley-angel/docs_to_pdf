@@ -23,7 +23,7 @@
     {% for key, sub_sect in sections.items() %}
     <article>
       <div id="{{ key }}"><h2>{{ key }}</h2></div>
-      {{ sub_sect.render(img_dir=img_dir) }}
+      {{ sub_sect }}
     </article>
     {% endfor %}
   </body>

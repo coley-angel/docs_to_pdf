@@ -11,6 +11,7 @@ revision: 1.1
 template: 'report'
 defaults: !include defaults.yml
 default_project: !include my_project_common/defaults.yml
+md_template: !md_template ../My_first_doc/section1.md
 sections:
  Opening: "opening.md"
  sample: "sample.md"

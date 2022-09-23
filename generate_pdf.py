@@ -6,11 +6,23 @@ import markdown
 from datetime import date
 import logging
 import argparse
-from Loader_class import Loader
 import logging
 import sys
+from Loader_class import Loader
+
 
 logger = logging.getLogger()
+
+def get_markdown(path_name) -> str:
+    with open(path_name, "r") as stream:
+        try:
+            extensions=['markdown.extensions.extra', 'markdown.extensions.codehilite', 
+                        'markdown.extensions.smarty', 'pymdownx.tilde', 'pymdownx.emoji', 
+                        'pymdownx.smartsymbols']
+            md_html = markdown.markdown(stream.read(), output_format='html',  extensions=extensions)
+        except Exception as exc:
+            md_html = ""
+        return jinja2.Template(md_html)
 
 def csv_to_list(docs: str) -> list:
     return list(map(str.strip, docs.split(",")))
@@ -46,7 +58,7 @@ def set_date(context):
     context['date'] = context.get('date') or get_date()
 
 def get_yml(path_name, variables_folder):
-    Loader._root = variables_folder
+    Loader.vars_path = variables_folder
     with open(path_name, "r") as stream:
         try:
             meta_data = yaml.load(stream, Loader)
@@ -54,17 +66,6 @@ def get_yml(path_name, variables_folder):
             logger.error(exc)
             meta_data = {}
         return meta_data
-
-def get_markdown(path_name) -> str:
-    with open(path_name, "r") as stream:
-        try:
-            extensions=['markdown.extensions.extra', 'markdown.extensions.codehilite', 
-                        'markdown.extensions.smarty', 'pymdownx.tilde', 'pymdownx.emoji', 
-                        'pymdownx.smartsymbols']
-            md_html = markdown.markdown(stream.read(), output_format='html',  extensions=extensions)
-        except Exception as exc:
-            md_html = ""
-        return jinja2.Template(md_html)
 
 def get_abs_path_directory(directory):
     path = os.path.dirname(os.path.abspath(directory))
@@ -97,12 +98,12 @@ def set_meta_data_paths(meta_data, dir_path):
     meta_data['img_dir'] = make_file_path(img_directory)
     return templates_dir
     
-def build_context(path, files, dir_path, base_yml="meta_data.yml"):
+def build_context(path, files, base_yml="meta_data.yml"):
     variables_folder = os.path.join(py_path, 'variables')
     if base_yml in files:
         base_file_path = os.path.join(path, base_yml)
         meta_data = get_yml(base_file_path, variables_folder)
-        template_dir = set_meta_data_paths(meta_data, dir_path)
+        template_dir = set_meta_data_paths(meta_data, path)
         get_sub_sections(path, meta_data)
     return meta_data, template_dir
 
@@ -119,7 +120,7 @@ def get_docs(docs):
     for directory in directorys:
         dir_path = os.path.join(doc_path, directory)
         sub_path, sub_directorys, sub_filenames = get_files(dir_path)
-        context, template_dir = build_context(path=sub_path, files=sub_filenames, dir_path=dir_path)
+        context, template_dir = build_context(path=sub_path, files=sub_filenames)
         render_html(template_dir, context)
 
 def setup_path(output_dir='results'):
