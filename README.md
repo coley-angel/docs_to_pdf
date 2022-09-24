@@ -19,3 +19,17 @@
 6. add a sections key to the meta_data.yaml file
    1. For every markdown file you want to include add a key under sections
    2. The key should be the name and the value the filename **in the same directory**
+
+## Running the script
+1. windows `python generate_pdf_class.py`
+2. linux/mac `python3 generate_pdf_class.py`
+
+## view flags:
+1. windows `python generate_pdf_class.py --help`
+2. linux/mac `python3 generate_pdf_class.py --help`
+
+| flag | Org | type |
+| ------ | ----------- | ----- |
+| --stdout   | view logs in stdout | bool |
+| --logging_lvl  | Choose Logging Level, Default INFO | str example: --logging_lvl DEBUG |
+| --doc | Name of the doc folders to generate PDFs | str example: --doc "my doc folder name"|
