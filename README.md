@@ -19,7 +19,7 @@
 6. add a sections key to the meta_data.yaml file
    1. For every markdown file you want to include add a key under sections
    2. The key should be the name and the value the filename **in the same directory**
-   3. Have fun with it
+   3. Have fun with it or dont
 
 ## Running the script
 1. windows `python generate_pdf_class.py`
